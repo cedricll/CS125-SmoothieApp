@@ -8,6 +8,8 @@ function App() {
   return (
     <div>
       {/* Insert routing here */} 
+      {/*putting home here for now*/}
+      <Home/>
     </div>
   )
 }
