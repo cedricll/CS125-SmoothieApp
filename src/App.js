@@ -6,17 +6,17 @@ import Home from './components/Home';
 import Navigation from "./components/Navigation";
 import Search from "./components/Search";
 import Profile from "./components/Profile";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
 
 function App() {
   return (
     <BrowserRouter>
-      <div class="App">
-        <Navigation/>
-        <br/><br/><br/><br/><br/><br/><br/>
-        <Route path="/" exact component={Home}/>
-        <Route path="/search" component={Search}/>
-        <Route path="/profile" component={Profile}/>
+      <div className="App">
+          <Route path="/signup" exact component={SignUp}/>
+          <Route path="/home" component={Home}/>
+          <Route path="/search" component={Search}/>
+          <Route path="/profile" component={Profile}/>
+          <Route path="/" exact component={SignIn}/>
       </div>
     </BrowserRouter>
   )

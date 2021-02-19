@@ -22,6 +22,8 @@ class SignUp extends Component {
     render() {
         return (
             <div className = "container">
+                <h1 className="App-header">BoujeeSmoothie</h1>
+                
                 <form onSubmit={this.handleSubmit} className="white">
                     <h5 className = "grey-text text-darken-3">Sign Up</h5>
                     <div className="input-field">

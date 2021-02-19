@@ -1,4 +1,6 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import Navigation from "../Navigation";
+import {Link} from "react-router-dom";
 
 class SignIn extends Component {
     state = {
@@ -19,7 +21,9 @@ class SignIn extends Component {
 
     render() {
         return (
-            <div className = "container">
+            <div className="container">
+                <h1 className="App-header">BoujeeSmoothie</h1>
+
                 <form onSubmit={this.handleSubmit} className="white">
                     <h5 className = "grey-text text-darken-3">Sign In</h5>
                     <div className="input-field">
@@ -34,6 +38,8 @@ class SignIn extends Component {
                         <button className="btn pink lighten-1 z-depth-0">Login</button>
                     </div>
                 </form>
+                <br/>
+                Don't have an account? <Link to="/signup">Click Here</Link>
             </div>
         )
     }

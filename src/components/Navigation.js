@@ -6,14 +6,14 @@ class Navigation extends Component {
 
     render() {
         return (
-            <nav class="Navigation">
+        <nav class="Navigation">
             <h1 background-color="white">BoujeeSmoothie</h1>
             <ul>
-                <Link class="Nav-link" to="/"><li>Home</li></Link>
-                <Link class="Nav-link" to="/search"><li>Search</li></Link>
-                <Link class="Nav-link" to="/profile"><li>Profile</li></Link>
+                <Link className="Nav-link" to="/home"><li>Home</li></Link>
+                <Link className="Nav-link" to="/search"><li>Search</li></Link>
+                <Link className="Nav-link" to="/profile"><li>Profile</li></Link>
             </ul>
-            </nav>
+        </nav>
         )
     }
 }

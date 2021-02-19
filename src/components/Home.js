@@ -1,6 +1,7 @@
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 import ToggleButton from 'react-bootstrap/ToggleButton'
 import Recipe from "./Recipe"
+import Navigation from "./Navigation";
 
 import React, {useEffect, useState} from 'react'
 
@@ -64,6 +65,8 @@ function Home() {
     
     return ( // what shows up on the web page
         <div className="App">
+        <Navigation/>
+                <br/><br/><br/><br/><br/><br/><br/>
 
         {/* <form className="search-form"> 
             <input className="search-bar" type="text" value={search} onChange={updateSearch}/>
