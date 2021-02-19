@@ -23,22 +23,27 @@ class SignIn extends Component {
             <div className="container">
                 <h1 className="App-header">BoujeeSmoothie</h1>
 
-                <form onSubmit={this.handleSubmit} className="white">
-                    <h5 className = "grey-text text-darken-3">Sign In</h5>
+                <form onSubmit={this.handleSubmit}>
+                    <h5 className="Title">Sign In</h5>
+
                     <div className="input-field">
                         <label htmlFor="email">Email</label>
-                        <input type = "email" id = "email" onChange={this.handleChange}/>
+                        <input type="email" id="email" onChange={this.handleChange}/>
                     </div>
+
                     <div className="input-field">
                         <label htmlFor="password">Password</label>
-                        <input type = "password" id = "password" onChange={this.handleChange}/>
+                        <input type="password" id="password" onChange={this.handleChange}/>
                     </div>
+
                     <div className="input-field">
-                        <button className="btn pink lighten-1 z-depth-0"><Link to="/home">Login</Link></button>
+                        <Link to="/home">
+                            <button className="Button">Login</button>
+                        </Link>
                     </div>
                 </form>
-                <br/>
-                Don't have an account? <Link to="/signup">Click Here</Link>
+
+                <br/>Don't have an account? <Link to="/signup" className="App-link">Click Here</Link>
             </div>
         )
     }

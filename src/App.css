@@ -20,7 +20,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #6ba181;
 }
 
 .Navigation {
@@ -51,12 +51,39 @@
 }
 
 .Navigation li:hover {
-  background-color: rgb(74, 105, 83);
+  background-color: #6ba181;
 }
 
 .Nav-link {
   color: white;
   align-items: center;
+}
+
+.Button {
+  background-color: #5b8a6e;
+  border-radius: 5px;
+  border-style: none;
+  padding: 10px;
+  margin: 10px;
+  color: white;
+}
+
+.Button:hover {
+  background-color: #6ba181;
+  cursor: pointer;
+}
+
+.Title {
+  font-size: x-large;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.input-field {
+  padding: 5px;
+}
+
+.input-field label{
+  padding: 5px;
 }
 
 @keyframes App-logo-spin {

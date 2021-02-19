@@ -1,9 +1,9 @@
-import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
-import ToggleButton from 'react-bootstrap/ToggleButton'
-import Recipe from "./Recipe"
+import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
+import ToggleButton from 'react-bootstrap/ToggleButton';
+import Recipe from "./Recipe";
 import Navigation from "./Navigation";
 
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react';
 
 function Home() {
     const APP_ID = 'bb6b3d95';

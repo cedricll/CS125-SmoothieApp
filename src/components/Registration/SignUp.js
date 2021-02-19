@@ -25,28 +25,44 @@ class SignUp extends Component {
             <div className = "container">
                 <h1 className="App-header">BoujeeSmoothie</h1>
 
-                <form onSubmit={this.handleSubmit} className="white">
-                    <h5 className = "grey-text text-darken-3">Sign Up</h5>
-                    <div className="input-field">
-                        <label htmlFor="email">Email</label>
-                        <input type = "email" id = "email" onChange={this.handleChange}/>
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor="password">Password</label>
-                        <input type = "password" id = "password" onChange={this.handleChange}/>
-                    </div>
+                <form onSubmit={this.handleSubmit}>
+                    <h5 className="Title">Sign Up</h5>
+
                     <div className="input-field">
                         <label htmlFor="firstName">First Name</label>
-                        <input type = "text" id = "firstName" onChange={this.handleChange}/>
+                        <input type="text" id="firstName" onChange={this.handleChange}/>
                     </div>
+
                     <div className="input-field">
                         <label htmlFor="lastName">Last Name</label>
-                        <input type = "text" id = "lastName" onChange={this.handleChange}/>
+                        <input type="text" id="lastName" onChange={this.handleChange}/>
                     </div>
+
                     <div className="input-field">
-                        <button className="btn pink lighten-1 z-depth-0"><Link to="/">Sign Up</Link></button>
+                        <label htmlFor="email">Email</label>
+                        <input type="email" id="email" onChange={this.handleChange}/>
                     </div>
+
+                    <div className="input-field">
+                        <label htmlFor="password">Password</label>
+                        <input type="password" id="password" onChange={this.handleChange}/>
+                    </div>
+
+                    <div className="input-field">
+                        <label htmlFor="password">Password</label>
+                        <input type="password" id="password" onChange={this.handleChange}/>
+                    </div>
+                    
+                    <div className="input-field">
+                        <Link to="/">
+                            <button className="Button">Sign Up</button>
+                        </Link>
+                    </div>
+
+
                 </form>
+
+                <br/>Already have an account? <Link to="/" className="App-link">Sign in</Link>
             </div>
         )
     }
