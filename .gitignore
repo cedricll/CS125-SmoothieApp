@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+/boujee_smoothie/CS125-SmoothieApp/node_modules
 
 # testing
 /coverage
