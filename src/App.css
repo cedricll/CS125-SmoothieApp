@@ -28,6 +28,42 @@
   color: #61dafb;
 }
 
+.Navigation {
+  width: 100%;
+  position: fixed;
+  padding-top: 10px;
+  text-align: center;
+  background-color: #434d61;
+  color: #ffffff;
+}
+
+.Navigation ul {
+  display: table;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  list-style: none;
+}
+
+.Navigation Link {
+  float: left;
+}
+
+.Navigation li{
+  justify-content: center;
+  float: left;
+  padding: 16px;
+}
+
+.Navigation li:hover {
+  background-color: #6b7996;
+}
+
+.Nav-link {
+  color: white;
+  align-items: center;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
