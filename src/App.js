@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import SignIn from './components/Registration/SignIn';
 import SignUp from './components/Registration/SignUp';
 import Home from './components/Home';
+import HomePage from './components/HomePage'
 import Search from "./components/Search";
 import Profile from "./components/Profile";
 import RecipePage from "./components/RecipePage";

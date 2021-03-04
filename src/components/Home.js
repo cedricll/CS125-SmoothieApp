@@ -8,9 +8,12 @@ import React, {useEffect, useState} from 'react';
 function Home() {
     const APP_ID = 'bb6b3d95';
     const APP_KEY = 'c79a906105c5e348ec12bb9b47b0b363';
+    // const index = 0;
+
 
     const [recipes, setRecipes] = useState([]);
     const [search, setSearch] = useState([]);
+    const [index, setIndex] = useState(0);
 
     const printOutSearch = (search) => {
         for (let i = 0; i < search.length; i++) {
@@ -18,7 +21,6 @@ function Home() {
         }
     }
   
-
     const makeDietQuery = (search) => {
         var dietQuery = "diet="
         for (let i = 0; i < search.length; i++) {
@@ -31,6 +33,7 @@ function Home() {
         }
     return dietQuery;
     }
+    
     // const [query, setQuery] = useState('');
     printOutSearch(search);
     var queryDiet = makeDietQuery(search);
@@ -63,8 +66,6 @@ function Home() {
         setSearch(e);
         // console.log("search after setSearch: " + search);
     }
-
-  
     
     return ( 
         <div className="App">
