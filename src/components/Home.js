@@ -10,7 +10,7 @@ function Home() {
     const APP_KEY = 'c79a906105c5e348ec12bb9b47b0b363';
 
     const [recipes, setRecipes] = useState([]);
-    const [search, setSearch] = useState(["low-carb"]);
+    const [search, setSearch] = useState([]);
 
     const printOutSearch = (search) => {
         for (let i = 0; i < search.length; i++) {
@@ -63,7 +63,7 @@ function Home() {
 
   
     
-    return ( // what shows up on the web page
+    return ( 
         <div className="App">
         <Navigation/>
                 <br/><br/><br/><br/><br/><br/><br/>
@@ -77,7 +77,6 @@ function Home() {
 
       
         <ToggleButtonGroup type="checkbox" value={search} onChange={updateSearch}>
-          {/* <ToggleButton value={"low-sodium"}>Low-Sodium</ToggleButton> */}
           <ToggleButton value={"high-protein"}>High-Protein</ToggleButton>
           <ToggleButton value={"low-carb"}>Low-Carb</ToggleButton>
         </ToggleButtonGroup>
