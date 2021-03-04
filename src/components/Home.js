@@ -8,9 +8,12 @@ import React, {useEffect, useState} from 'react';
 function Home() {
     const APP_ID = 'bb6b3d95';
     const APP_KEY = 'c79a906105c5e348ec12bb9b47b0b363';
+    // const index = 0;
+
 
     const [recipes, setRecipes] = useState([]);
     const [search, setSearch] = useState([]);
+    const [index, setIndex] = useState(0);
 
     const printOutSearch = (search) => {
         for (let i = 0; i < search.length; i++) {
@@ -18,7 +21,6 @@ function Home() {
         }
     }
   
-
     const makeDietQuery = (search) => {
         var dietQuery = "diet="
         for (let i = 0; i < search.length; i++) {
@@ -31,6 +33,7 @@ function Home() {
         }
     return dietQuery;
     }
+    
     // const [query, setQuery] = useState('');
     printOutSearch(search);
     var queryDiet = makeDietQuery(search);
@@ -47,7 +50,7 @@ function Home() {
 
     const getRecipes = async () => { // this is the search query for smoothies only
         const response = await fetch( // loop through "search" to create a new query string
-        `https://api.edamam.com/search?q=smoothie&${queryDiet}app_id=${APP_ID}&app_key=${APP_KEY}`
+        `https://api.edamam.com/search?q=smoothie&app_id=${APP_ID}&app_key=${APP_KEY}&from=${index}&ingr=10` // from, to, ingr
         );
         const data = await response.json();
         setRecipes(data.hits);
@@ -60,8 +63,6 @@ function Home() {
         setSearch(e);
         // console.log("search after setSearch: " + search);
     }
-
-  
     
     return ( 
         <div className="App">
