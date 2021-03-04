@@ -59,6 +59,14 @@
   align-items: center;
 }
 
+.RecipeName {
+  color: #1d1d1d;
+}
+
+.RecipeImage {
+  border-radius: 10px;
+}
+
 .Button {
   background-color: #5b8a6e;
   border-radius: 5px;
@@ -71,6 +79,17 @@
 .Button:hover {
   background-color: #6ba181;
   cursor: pointer;
+}
+
+.LikeButton {
+  background-color: white;
+  outline: none;
+  border: none;
+  padding-top: 10px;
+}
+
+.LikeButton:focus {
+  outline: none;
 }
 
 .Title {

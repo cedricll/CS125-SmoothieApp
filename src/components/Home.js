@@ -46,8 +46,11 @@ function Home() {
     }, [search] ); // delete search?
 
     const getRecipes = async () => { // this is the search query for smoothies only
+        // const response = await fetch( // loop through "search" to create a new query string
+        // `https://api.edamam.com/search?q=smoothie&${queryDiet}app_id=${APP_ID}&app_key=${APP_KEY}`
+        // );
         const response = await fetch( // loop through "search" to create a new query string
-        `https://api.edamam.com/search?q=smoothie&${queryDiet}app_id=${APP_ID}&app_key=${APP_KEY}`
+        `https://api.edamam.com/search?q=smoothie&app_id=${APP_ID}&app_key=${APP_KEY}`
         );
         const data = await response.json();
         setRecipes(data.hits);
@@ -76,10 +79,10 @@ function Home() {
         </form> */}
 
       
-        <ToggleButtonGroup type="checkbox" value={search} onChange={updateSearch}>
+        {/* <ToggleButtonGroup type="checkbox" value={search} onChange={updateSearch}>
           <ToggleButton value={"high-protein"}>High-Protein</ToggleButton>
           <ToggleButton value={"low-carb"}>Low-Carb</ToggleButton>
-        </ToggleButtonGroup>
+        </ToggleButtonGroup> */}
 
         {/* <button className="search-button" type="submit" onSubmit={getSearch}>
             Search
@@ -89,8 +92,14 @@ function Home() {
         {/* < ToggleButtonGroupControlled value={search}/> */}
 
         {recipes.map(recipe => (
-            <Recipe key={recipe.recipe.label} title={recipe.recipe.label} calories={recipe.recipe.calories}
-            image={recipe.recipe.image}/>
+            <Recipe key={recipe.recipe.label} 
+                    title={recipe.recipe.label} 
+                    source={recipe.recipe.source}
+                    link={recipe.recipe.url}
+                    image={recipe.recipe.image}
+                    healthLabels={recipe.recipe.healthLabels}
+                    dietLabels={recipe.recipe.dietLabels}
+            />
         ))}
 
         

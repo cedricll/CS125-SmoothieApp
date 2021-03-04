@@ -10,6 +10,7 @@ class RecipePage extends Component {
                 <Navigation/>
                 <br/><br/><br/><br/><br/><br/><br/>
                 <h1>Recipe</h1>
+                
             </div>
         )
     }

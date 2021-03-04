@@ -94,7 +94,7 @@ const SignUp = () => {
 
                 <div className="input-field">
                     <Link to="/" onClick={handleSubmit}> 
-                        SignUp
+                        <button className="Button">Sign Up</button>
                     </Link>
                 </div>
 
