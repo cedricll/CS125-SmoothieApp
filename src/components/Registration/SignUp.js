@@ -12,6 +12,8 @@ const SignUp = () => {
         lastName: "",
         email: "",
         password: "",
+        health: "",
+        diet: "",
     })
 
     const handleChange = (e) => { // text user input
@@ -78,15 +80,15 @@ const SignUp = () => {
 
                 <h2>Health Options</h2>
                 <ToggleButtonGroup type="checkbox" >
-                    <ToggleButton value={"Vegan"}>Vegan</ToggleButton>
-                    <ToggleButton value={"Vegetarian"}>Vegetarian</ToggleButton>
+                    <ToggleButton name="health" value={"Vegan"} onChange={handleChange}>Vegan</ToggleButton>
+                    <ToggleButton name="health" value={"Vegetarian"} onChange={handleChange}>Vegetarian</ToggleButton>
                 </ToggleButtonGroup>
                 <br/>
 
                 <h2>Diet Options</h2>
                 <ToggleButtonGroup type="checkbox" >
-                    <ToggleButton value={"High-Protein"}>High-Protein</ToggleButton>
-                    <ToggleButton value={"Low-Carb"}>Low-Carb</ToggleButton>
+                    <ToggleButton name="diet" value={"High-Protein"} onChange={handleChange}>High-Protein</ToggleButton>
+                    <ToggleButton name="diet" value={"Low-Carb"} onChange={handleChange}>Low-Carb</ToggleButton>
                 </ToggleButtonGroup>
                 <br/>
 
