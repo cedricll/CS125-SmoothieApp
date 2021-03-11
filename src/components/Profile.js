@@ -26,7 +26,7 @@ const Profile = () => {
             <h1>Profile Page</h1>
             {profiles.map(profile=>
                 <div>
-                    <h1>Name: {profile.firstName}</h1>
+                    <h2>Name: {profile.firstName}</h2>
                     <p>{profile.email}</p>
                 </div>
                 )}
