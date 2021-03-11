@@ -12,6 +12,7 @@ class Navigation extends Component {
                 <Link className="Nav-link" to="/home"><li>Home</li></Link>
                 <Link className="Nav-link" to="/search"><li>Search</li></Link>
                 <Link className="Nav-link" to="/profile"><li>Profile</li></Link>
+                <Link className="Nav-link" to="/bookmark"><li>Saved Recipes</li></Link>
             </ul>
         </nav>
         )

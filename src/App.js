@@ -8,6 +8,7 @@ import Search from "./components/Search";
 import Profile from "./components/Profile";
 import RecipePage from "./components/RecipePage";
 import {BrowserRouter, Route} from "react-router-dom";
+import Bookmark from './components/Bookmark';
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
           <Route path="/home" component={Home}/>
           <Route path="/search" component={Search}/>
           <Route path="/profile" component={Profile}/>
-          <Route path="/recipe" component={RecipePage}/>
+          <Route path="/bookmark" component={Bookmark}/>
           <Route path="/" exact component={SignIn}/>
       </div>
     </BrowserRouter>
