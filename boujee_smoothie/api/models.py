@@ -1,12 +1,26 @@
 from django.db import models
 
 # Create your models here.
-class User(models.Model):
-    user_id = models.IntegerField()
-    fist_name = models.CharField(max_length=50)
+# User -> User_Info
+class User_Info(models.Model):
+    email = models.CharField(max_length=50, primary_key=True)
+    first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    email = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
 
-class UserPreferences(models.model):
-    pass
+class Saved_Recipes(models.Model):
+    email = models.CharField(max_length=50, primary_key=True)
+    recipe_name = models.CharField(max_length = 50)
+    image_url = models.CharField(max_length=250)
+    recipe_url = models.CharField(max_length=250)
+    source = models.CharField(max_length=100)
+
+class Health_Options(models.Model):
+    email = models.CharField(max_length=50, primary_key=True)
+    option = models.CharField(max_length=50)
+    score = models.IntegerField()
+
+''' Might not use '''
+class Dietary_Restrictions(models.Model):
+    email = models.CharField(max_length=50, primary_key=True)
+    restriction = models.CharField(max_length=50)
