@@ -78,19 +78,19 @@ const SignUp = () => {
                     <input type="password" name="password" onChange={handleChange}/>
                 </div> */}
 
-                <h2>Health Options</h2>
+                <h2>Dietary Restrictons</h2>
                 <ToggleButtonGroup type="checkbox" >
                     <ToggleButton name="health" value={"Vegan"} onChange={handleChange}>Vegan</ToggleButton>
                     <ToggleButton name="health" value={"Vegetarian"} onChange={handleChange}>Vegetarian</ToggleButton>
                 </ToggleButtonGroup>
                 <br/>
 
-                <h2>Diet Options</h2>
+                {/* <h2>Dietary Preferences</h2>
                 <ToggleButtonGroup type="checkbox" >
                     <ToggleButton name="diet" value={"High-Protein"} onChange={handleChange}>High-Protein</ToggleButton>
                     <ToggleButton name="diet" value={"Low-Carb"} onChange={handleChange}>Low-Carb</ToggleButton>
                 </ToggleButtonGroup>
-                <br/>
+                <br/> */}
 
                 <div className="input-field">
                     <Link to="/" onClick={handleSubmit}> 

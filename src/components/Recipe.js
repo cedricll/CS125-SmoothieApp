@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
-import {BsFillHeartFill} from "react-icons/bs";
+import {BsFillBookmarkFill} from "react-icons/bs";
 
 var testing = (healthLabels, dietLabels, hrt) => {
     console.log("Liked!")
@@ -9,12 +9,12 @@ var testing = (healthLabels, dietLabels, hrt) => {
     // Maybe increment all of these health labels by 1pt every time they like a recipe like this
 }
 
-// var heart = (color) => {
-//     return (<BsFillHeartFill color={color} size="20px"></BsFillHeartFill>);
+// var bookmark = (color) => {
+//     return (<BsFillbookmarkFill color={color} size="20px"></BsFillbookmarkFill>);
 // }
 
 // const Recipe = ({title, source, link, image, healthLabels, dietLabels}) => {
-//     var hrt = heart("gray");
+//     var hrt = bookmark("gray");
 
 //     return (
 //         <div>
@@ -35,25 +35,25 @@ class Recipe extends Component {
         super(props);
         this.state = {
             liked: false,
-            heartColor: "gray"
+            bookmarkColor: "gray"
         }
     }
 
     like = () => {
         this.setState({
             liked: true,
-            heartColor: "red"
+            bookmarkColor: "black"
         })
     }
 
     unlike = () => {
         this.setState({
             liked: false, 
-            heartColor: "gray"
+            bookmarkColor: "gray"
         })
     }
 
-    heartClicked = () => {
+    bookmarkClicked = () => {
         if (this.state.liked) {
             this.unlike();
         }
@@ -67,8 +67,8 @@ class Recipe extends Component {
             <div>
                 <h1 className="RecipeName">{this.props.title}</h1>
                 <img className="RecipeImage" src={this.props.image} alt=""/><br/>
-                <button className="LikeButton" onClick={this.heartClicked}>
-                    <BsFillHeartFill color={this.state.heartColor} size="20px"></BsFillHeartFill>
+                <button className="LikeButton" onClick={this.bookmarkClicked}>
+                    <BsFillBookmarkFill color={this.state.bookmarkColor} size="20px"></BsFillBookmarkFill>
                 </button><br/>
                 <a href={this.props.link}>
                     <button className="Button">View Recipe On {this.props.source}</button>

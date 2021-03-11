@@ -46,14 +46,14 @@ function Home() {
         printOutSearch(search);
         var queryDiet = makeDietQuery(search);
         console.log(queryDiet);
-    }, [search] ); // delete search?
+    }, [search, index] ); // delete search?
 
     const getRecipes = async () => { // this is the search query for smoothies only
         // const response = await fetch( // loop through "search" to create a new query string
         // `https://api.edamam.com/search?q=smoothie&${queryDiet}app_id=${APP_ID}&app_key=${APP_KEY}`
         // );
         const response = await fetch( // loop through "search" to create a new query string
-        `https://api.edamam.com/search?q=smoothie&app_id=${APP_ID}&app_key=${APP_KEY}`
+        `https://api.edamam.com/search?q=smoothie&app_id=${APP_ID}&app_key=${APP_KEY}&from=${index}`
         );
         const data = await response.json();
         setRecipes(data.hits);
@@ -65,6 +65,22 @@ function Home() {
         // console.log("search before setSearch: " + search)
         setSearch(e);
         // console.log("search after setSearch: " + search);
+    }
+
+    const getNextResults = (e) => {
+        e.preventDefault();
+        setIndex(index + 10);
+    }
+
+
+    const getPrevResults = (e) => {
+        e.preventDefault();
+        if (index != 0) {
+            setIndex(index - 10);
+        }
+        else {
+            
+        }
     }
     
     return ( 
@@ -103,6 +119,8 @@ function Home() {
             />
         ))}
 
+            <button onClick={getPrevResults}>Prev</button>
+            <button onClick={getNextResults}>Next</button>
         
         </div>
     );
