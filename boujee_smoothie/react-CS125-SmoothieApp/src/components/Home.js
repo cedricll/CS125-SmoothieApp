@@ -1,0 +1,129 @@
+import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
+import ToggleButton from 'react-bootstrap/ToggleButton';
+import Recipe from "./Recipe";
+import Navigation from "./Navigation";
+
+import React, {useEffect, useState} from 'react';
+
+function Home() {
+    const APP_ID = 'bb6b3d95';
+    const APP_KEY = 'c79a906105c5e348ec12bb9b47b0b363';
+    // const index = 0;
+
+
+    const [recipes, setRecipes] = useState([]);
+    const [search, setSearch] = useState([]);
+    const [index, setIndex] = useState(0);
+
+    const printOutSearch = (search) => {
+        for (let i = 0; i < search.length; i++) {
+            console.log(search[i])
+        }
+    }
+  
+    const makeDietQuery = (search) => {
+        var dietQuery = "diet="
+        for (let i = 0; i < search.length; i++) {
+            dietQuery += search[i];
+            if (i == search.length - 1) {
+                dietQuery += "&";
+                break;
+            }
+            dietQuery += "&diet=";
+        }
+    return dietQuery;
+    }
+    
+    // const [query, setQuery] = useState('');
+    printOutSearch(search);
+    var queryDiet = makeDietQuery(search);
+    useEffect(() => { // runs everytime the web page (re)renders
+        // console.log("Effect has been run");
+        // console.log("search: " + search);
+        getRecipes();
+        // console.log(typeof(search.length));
+        // console.log(search.length);
+        printOutSearch(search);
+        var queryDiet = makeDietQuery(search);
+        console.log(queryDiet);
+    }, [search, index] ); // delete search?
+
+    const getRecipes = async () => { // this is the search query for smoothies only
+        // const response = await fetch( // loop through "search" to create a new query string
+        // `https://api.edamam.com/search?q=smoothie&${queryDiet}app_id=${APP_ID}&app_key=${APP_KEY}`
+        // );
+        const response = await fetch( // loop through "search" to create a new query string
+        `https://api.edamam.com/search?q=smoothie&app_id=${APP_ID}&app_key=${APP_KEY}&from=${index}`
+        );
+        const data = await response.json();
+        setRecipes(data.hits);
+        console.log(data.hits);
+    }
+
+    const updateSearch = (e) => { // modify this
+        // console.log("updated e: " + e);
+        // console.log("search before setSearch: " + search)
+        setSearch(e);
+        // console.log("search after setSearch: " + search);
+    }
+
+    const getNextResults = (e) => {
+        e.preventDefault();
+        setIndex(index + 10);
+    }
+
+
+    const getPrevResults = (e) => {
+        e.preventDefault();
+        if (index != 0) {
+            setIndex(index - 10);
+        }
+        else {
+            
+        }
+    }
+    
+    return ( 
+        <div className="App">
+        <Navigation/>
+                <br/><br/><br/><br/><br/><br/><br/>
+
+        {/* <form className="search-form"> 
+            <input className="search-bar" type="text" value={search} onChange={updateSearch}/>
+            <button className="search-button" type="submit">
+            Search
+            </button>
+        </form> */}
+
+      
+        {/* <ToggleButtonGroup type="checkbox" value={search} onChange={updateSearch}>
+          <ToggleButton value={"high-protein"}>High-Protein</ToggleButton>
+          <ToggleButton value={"low-carb"}>Low-Carb</ToggleButton>
+        </ToggleButtonGroup> */}
+
+        {/* <button className="search-button" type="submit" onSubmit={getSearch}>
+            Search
+        </button> */}
+      
+
+        {/* < ToggleButtonGroupControlled value={search}/> */}
+
+        {recipes.map(recipe => (
+            <Recipe key={recipe.recipe.label} 
+                    title={recipe.recipe.label} 
+                    source={recipe.recipe.source}
+                    link={recipe.recipe.url}
+                    image={recipe.recipe.image}
+                    healthLabels={recipe.recipe.healthLabels}
+                    dietLabels={recipe.recipe.dietLabels}
+            />
+        ))}
+
+            <button onClick={getPrevResults}>Prev</button>
+            <button onClick={getNextResults}>Next</button>
+        
+        </div>
+    );
+}
+
+export default Home
