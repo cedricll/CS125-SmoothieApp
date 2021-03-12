@@ -15,12 +15,11 @@ class Saved_Recipes(models.Model):
     recipe_url = models.CharField(max_length=250)
     source = models.CharField(max_length=100)
 
-class Health_Options(models.Model):
+class Preferences(models.Model):
     email = models.CharField(max_length=50, primary_key=True)
     option = models.CharField(max_length=50)
     score = models.IntegerField()
 
-''' Might not use '''
 class Dietary_Restrictions(models.Model):
     email = models.CharField(max_length=50, primary_key=True)
-    restriction = models.CharField(max_length=50)
+    restriction = models.IntegerField()

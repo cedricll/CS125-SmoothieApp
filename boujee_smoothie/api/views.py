@@ -51,6 +51,13 @@ def userUpdate(request, pk):
 
     return Response(serializer.data)
 
+@api_view(['DELETE'])
+def userDelete(request, pk):
+	user = User.objects.get(id=pk)
+	user.delete()
+
+	return Response('Item succsesfully delete!')
+
 ''' SAVED_RECIPES '''
 
 @api_view(['GET'])
@@ -105,7 +112,31 @@ def healthOptionsDetail(request, pk):
     serializer = Health_Options_Serializer(health_options, many=False)
     return Response(serializer.data)
 
+''' DIETARY RESTRICTIONS '''
+@api_view(['POST'])
+def dietCreate(request):
+    serializer = Dietary_Restrictions_Serializer(data=request.data)
 
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def dietUpdate(request, pk):
+    health_options = Health_Options.objects.get(email=pk)
+    serializer = Health_Options_Serializer(instance=health_options, data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def healthOptionsDetail(request, pk):
+    health_options = Health_Options.objects.get(email=pk)
+    serializer = Health_Options_Serializer(health_options, many=False)
+    return Response(serializer.data)
 
 
 

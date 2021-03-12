@@ -7,6 +7,7 @@ urlpatterns = [
     path('user-create/', views.userCreate, name="user-create"),
     path('user-update/', views.userUpdate, name="user-update"),
     path('user-detail/<str:pk>/', views.userDetail, name="user-detail"),
+    path('user-delete/<str:pk>/', views.userDelete, name="user-delete"),
         
     path('recipe-create/', views.recipeCreate, name="recipe-create"),
     path('recipe-update/', views.recipeUpdate, name="recipe-update"),
