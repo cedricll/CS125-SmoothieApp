@@ -17,9 +17,7 @@ urlpatterns = [
     path('recipe-detail/<str:pk>/', views.recipeDetail, name="recipe-detail"),
 
     # PREFERENCES
-    path('health-options-create/', views.healthOptionsCreate, name="health-options-create"),
-    path('health-options-update/', views.healthOptionsUpdate, name="health-options-update"),
-    path('health-options-detail/<str:pk>/', views.healthOptionsDetail, name="health-options-detail")
+    
 
     
 ]

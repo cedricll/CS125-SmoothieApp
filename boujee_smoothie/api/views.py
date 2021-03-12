@@ -86,30 +86,31 @@ def recipeUpdate(request, pk):
     return Response(serializer.data)
 
 ''' PREFERENCES '''
-@api_view(['GET'])
-def recipeDetail(request, pk):
-    recipe = Saved_Recipes.objects.get(email=pk)
-    serializer = Saved_Recipes(recipe, many=False)
-    return Response(serializer.data)
 
-@api_view(['POST'])
-def recipeCreate(request):
-    serializer = Saved_Recipes(data=request.data)
+# @api_view(['GET'])
+# def recipeDetail(request, pk):
+#     recipe = Saved_Recipes.objects.get(email=pk)
+#     serializer = Saved_Recipes(recipe, many=False)
+#     return Response(serializer.data)
 
-    if serializer.is_valid():
-        serializer.save()
+# @api_view(['POST'])
+# def recipeCreate(request):
+#     serializer = Saved_Recipes(data=request.data)
 
-    return Response(serializer.data)
+#     if serializer.is_valid():
+#         serializer.save()
 
-@api_view(['POST'])
-def recipeUpdate(request, pk):
-    user = Saved_Recipes.objects.get(email=pk)
-    serializer = Saved_Recipes_Serializer(instance=user, data=request.data)
+#     return Response(serializer.data)
 
-    if serializer.is_valid():
-        serializer.save()
+# @api_view(['POST'])
+# def recipeUpdate(request, pk):
+#     user = Saved_Recipes.objects.get(email=pk)
+#     serializer = Saved_Recipes_Serializer(instance=user, data=request.data)
 
-    return Response(serializer.data)
+#     if serializer.is_valid():
+#         serializer.save()
+
+#     return Response(serializer.data)
 
 
 
