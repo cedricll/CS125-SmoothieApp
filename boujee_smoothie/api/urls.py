@@ -18,6 +18,7 @@ urlpatterns = [
     path('recipe-create/', views.recipeCreate, name="recipe-create"),
     path('recipe-update/', views.recipeUpdate, name="recipe-update"),
     path('recipe-detail/<str:pk>/', views.recipeDetail, name="recipe-detail"),
+    path('recipe-delete/<str:e>/<str:r>/', views.recipeDelete, name="recipe-delete"),
 
     # PREFERENCES
     path('preferences-list/', views.preferencesList, name="preferences-list"),

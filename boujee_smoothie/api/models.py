@@ -10,7 +10,7 @@ class User_Info(models.Model):
     dietary_restrictions = models.IntegerField()
 
 class Saved_Recipes(models.Model):
-    email = models.CharField(max_length=50, primary_key=True)
+    email = models.CharField(max_length=50)
     recipe_name = models.CharField(max_length = 50)
     image_url = models.CharField(max_length=250)
     recipe_url = models.CharField(max_length=250)

@@ -68,9 +68,17 @@ def recipeList(request):
 
 @api_view(['GET'])
 def recipeDetail(request, pk):
-    recipe = Saved_Recipes.objects.get(email=pk)
-    serializer = Saved_Recipes(recipe, many=False)
+    # recipe = Saved_Recipes.objects.get(email=pk)
+    recipe = Saved_Recipes.objects.filter(email=pk)
+    serializer = Saved_Recipes(recipe, many=True)
     return Response(serializer.data)
+
+@api_view(['DELETE'])
+def recipeDelete(request, e, r):
+	recipe = Saved_Recipes.objects.filter(email=r).filter(recipe_name = r)
+	recipe.delete()
+
+    return Response('Item succsesfully delete!')
 
 @api_view(['POST'])
 def recipeCreate(request):
