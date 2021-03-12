@@ -37,7 +37,6 @@ def userCreate(request):
     serializer = User_Serializer(data=request.data)
 
     if serializer.is_valid():
-        print("shits valid yo")
         serializer.save()
 
     return Response(serializer.data)
@@ -80,5 +79,34 @@ def recipeUpdate(request, pk):
     return Response(serializer.data)
 
 ''' HEALTH_OPTIONS '''
+
+@api_view(['POST'])
+def healthOptionsCreate(request):
+    serializer = Health_Options_Serializer(data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def healthOptionsUpdate(request, pk):
+    health_options = Health_Options.objects.get(email=pk)
+    serializer = Health_Options_Serializer(instance=health_options, data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def healthOptionsDetail(request, pk):
+    health_options = Health_Options.objects.get(email=pk)
+    serializer = Health_Options_Serializer(health_options, many=False)
+    return Response(serializer.data)
+
+
+
+
 
 

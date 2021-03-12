@@ -16,6 +16,7 @@ class Health_Options_Serializer(serializers.ModelSerializer):
         model = Health_Options
         fields = "__all__" # to diaplay all atrributes of model
 
+''' Might not use '''
 class Dietary_Restrictions_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Dietary_Restrictions
