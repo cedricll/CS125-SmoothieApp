@@ -13,7 +13,6 @@ const Profile = () => {
     useEffect(() => {
         fetch("/profiles").then(res=> {
             if (res.ok) {
-                // console.log(res.json());
                 return res.json()
             }
         }).then(jsonRes => setProfiles(jsonRes));

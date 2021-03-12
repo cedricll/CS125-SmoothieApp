@@ -1,9 +1,5 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
 import {Link} from "react-router-dom";
-import axios from "axios"
-
-import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
-import ToggleButton from 'react-bootstrap/ToggleButton';
 
 const SignUp = () => {
 
@@ -28,8 +24,7 @@ const SignUp = () => {
         lastName: "",
         email: "",
         password: "",
-        health: "",
-        diet: "",
+        diet: 0,
     })
 
     const handleChange = (e) => { // text user input
@@ -42,37 +37,34 @@ const SignUp = () => {
                 [name]: value,
             }
         })
-        
-        // this.setState({
-        //     [e.target.id]: e.target.value
-        // })
+    }
+
+    const updateDiet = (e) => {
+        console.log(e);
+
     }
 
     const handleSubmit = (e) => {
         // e.preventDefault(); // stops the page from refreshing
-        var csrftoken = getCookie('csrftoken');
+        // var csrftoken = getCookie('csrftoken');
         console.log("submitted"); // this has the user email and password information
         const newProfile = {
             email: input.email,
             first_name: input.firstName,
             last_name: input.lastName,
             password: input.password,
+            dietary_restrictions: 0
         }
         const url = "http://127.0.0.1:8000/api/user-create/";
-        // axios.post("http://127.0.0.1:8000/api/user-create/", json.stringify(newProfile));
-        // fetch('http://127.0.0.1:8000/api/user-create/')
-        //     .then(response => response.json())
-        //     .then(data => json.stringify(newProfile))
-        // lmao
 
         fetch(url, {
             method:'POST',
             headers:{
               'Content-type':'application/json',
-              'X-CSRFToken': csrftoken,
+            //   'X-CSRFToken': csrftoken,
             },
             body:JSON.stringify(newProfile)
-          })
+        })
     }
 
     
@@ -103,24 +95,14 @@ const SignUp = () => {
                     <input type="password" name="password" value={input.password} onChange={handleChange}/>
                 </div>
 
-                {/* <div className="input-field">
-                    <label htmlFor="password">Password</label>
-                    <input type="password" name="password" onChange={handleChange}/>
-                </div> */}
-
                 <h2>Dietary Restrictons</h2>
-                <ToggleButtonGroup type="checkbox" >
-                    <ToggleButton name="health" value={"Vegan"} onChange={handleChange}>Vegan</ToggleButton>
-                    <ToggleButton name="health" value={"Vegetarian"} onChange={handleChange}>Vegetarian</ToggleButton>
-                </ToggleButtonGroup>
+                <input type="radio" id="diet_none" name="dietRestriction" value={input.diet} onChange={updateDiet}/>
+                <label for="diet_none">None</label><br></br>
+                <input type="radio" id="diet_vegan" name="dietRestriction" value={input.diet} onChange={updateDiet}/>
+                <label for="diet_vegan">Vegan</label><br></br>
+                <input type="radio" id="diet_vegetarian" name="dietRestriction" value={input.diet} onChange={updateDiet}/>
+                <label for="diet_vegetarian">Vegetarian</label><br></br>
                 <br/>
-
-                {/* <h2>Dietary Preferences</h2>
-                <ToggleButtonGroup type="checkbox" >
-                    <ToggleButton name="diet" value={"High-Protein"} onChange={handleChange}>High-Protein</ToggleButton>
-                    <ToggleButton name="diet" value={"Low-Carb"} onChange={handleChange}>Low-Carb</ToggleButton>
-                </ToggleButtonGroup>
-                <br/> */}
 
                 <div className="input-field">
                     <Link to="/" onClick={handleSubmit}> 
