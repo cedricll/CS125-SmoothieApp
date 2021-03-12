@@ -2,32 +2,6 @@ import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 import {BsFillBookmarkFill} from "react-icons/bs";
 
-var testing = (healthLabels, dietLabels, hrt) => {
-    console.log("Liked!")
-    console.log("Health labels: " + healthLabels);
-    console.log("Diet labels: " + dietLabels);
-    // Maybe increment all of these health labels by 1pt every time they like a recipe like this
-}
-
-// var bookmark = (color) => {
-//     return (<BsFillbookmarkFill color={color} size="20px"></BsFillbookmarkFill>);
-// }
-
-// const Recipe = ({title, source, link, image, healthLabels, dietLabels}) => {
-//     var hrt = bookmark("gray");
-
-//     return (
-//         <div>
-//             <h1 className="RecipeName">{title}</h1>
-//             <img className="RecipeImage" src={image} alt=""/><br/>
-//             <button className="LikeButton" onClick={() => hrt.color=}></button><br/>
-//             {hrt}<br/>
-//             <a href={link}>
-//                 <button className="Button">View Recipe On {source}</button>
-//             </a>
-//         </div>
-//     );
-// }
 
 class Recipe extends Component {
     
@@ -35,14 +9,15 @@ class Recipe extends Component {
         super(props);
         this.state = {
             liked: false,
-            bookmarkColor: "gray"
+            bookmarkColor: "gray",
+            label: ""
         }
     }
 
     like = () => {
         this.setState({
             liked: true,
-            bookmarkColor: "black"
+            bookmarkColor: "yellow"
         })
     }
 
@@ -54,6 +29,57 @@ class Recipe extends Component {
     }
 
     bookmarkClicked = () => {
+        // Get recipe name and split into separate words (remove smoothie)
+        var words = this.props.title.label.split(" ");
+        words.forEach(word => {
+            // 
+        });
+
+        // These lines of code under here go into for loop
+        // Do this stuff to CHECK if word in Preferences
+
+        // fetch(`http://127.0.0.1:8000/api/user-detail/${this.state.email}/`)
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         if (data.password == this.state.password) {
+        //             this.props.history.push("home");
+        //         }
+        //         else {
+        //             this.setState({message: "Account with that login information not found"});
+        //         }
+        //     });
+
+        // CREATE NEW ENTRY IOF NOT EXIST
+        // fetch(url, {
+        //     method:'POST',
+        //     headers:{
+        //       'Content-type':'application/json',
+        //     //   'X-CSRFToken': csrftoken,
+        //     },
+        //     body:JSON.stringify(newProfile)
+        // });
+
+        // UPDATE EXISTING ENTRY IF EXIST
+        // fetch(url, {
+        //     method:'POST',
+        //     headers:{
+        //       'Content-type':'application/json',
+        //     //   'X-CSRFToken': csrftoken,
+        //     },
+        //     body:JSON.stringify(newProfile)
+        // });
+
+        // ADD ENTRY TO SAVED RECIPES
+        // fetch(url, {
+        //     method:'POST',
+        //     headers:{
+        //       'Content-type':'application/json',
+        //     //   'X-CSRFToken': csrftoken,
+        //     },
+        //     body:JSON.stringify(newProfile)
+        // });
+
+        // Toggle Icon View
         if (this.state.liked) {
             this.unlike();
         }

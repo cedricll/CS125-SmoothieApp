@@ -54,7 +54,7 @@ const SignUp = () => {
             last_name: input.lastName,
             password: input.password,
             dietary_restrictions: 0
-        }
+        };
         const url = "http://127.0.0.1:8000/api/user-create/";
 
         fetch(url, {
@@ -64,7 +64,7 @@ const SignUp = () => {
             //   'X-CSRFToken': csrftoken,
             },
             body:JSON.stringify(newProfile)
-        })
+        });
     }
 
     
