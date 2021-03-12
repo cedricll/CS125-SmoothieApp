@@ -11,8 +11,6 @@ function Home() {
 
     const [recipes, setRecipes] = useState([]);
     const [search, setSearch] = useState([]);
-    const [index, setIndex] = useState(0);
-    const [enabledPrev, setEnabledPrev] = useState(false);
 
     const printOutSearch = (search) => {
         for (let i = 0; i < search.length; i++) {
@@ -33,56 +31,24 @@ function Home() {
     return dietQuery;
     }
     
-    // const [query, setQuery] = useState('');
-    printOutSearch(search);
     var queryDiet = makeDietQuery(search);
-    useEffect(() => { // runs everytime the web page (re)renders
-        // console.log("Effect has been run");
-        // console.log("search: " + search);
+    useEffect(() => { 
+        // runs everytime the web page (re)renders
         getRecipes();
-        // console.log(typeof(search.length));
-        // console.log(search.length);
+
         printOutSearch(search);
         var queryDiet = makeDietQuery(search);
         console.log(queryDiet);
-    }, [search, index] ); // delete search?
+    }); 
 
-    const getRecipes = async () => { // this is the search query for smoothies only
-        // const response = await fetch( // loop through "search" to create a new query string
-        // `https://api.edamam.com/search?q=smoothie&${queryDiet}app_id=${APP_ID}&app_key=${APP_KEY}`
-        // );
-        const response = await fetch( // loop through "search" to create a new query string
-        `https://api.edamam.com/search?q=smoothie&app_id=${APP_ID}&app_key=${APP_KEY}&from=${index}`
+    const getRecipes = async () => {
+        const response = await fetch(
+        // loop through "search" to create a new query string
+        `https://api.edamam.com/search?q=smoothie&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=50`
         );
         const data = await response.json();
         setRecipes(data.hits);
-        if (index == 0) {
-            setEnabledPrev(true);
-        }
         console.log(data.hits);
-    }
-
-    const updateSearch = (e) => { // modify this
-        // console.log("updated e: " + e);
-        // console.log("search before setSearch: " + search)
-        setSearch(e);
-        // console.log("search after setSearch: " + search);
-    }
-
-    const getNextResults = (e) => {
-        e.preventDefault();
-        setIndex(index + 10);
-    }
-
-
-    const getPrevResults = (e) => {
-        e.preventDefault();
-        if (index != 0) {
-            setIndex(index - 10);
-        }
-        else {
-            
-        }
     }
     
     return ( 
@@ -100,9 +66,6 @@ function Home() {
                     dietLabels={recipe.recipe.dietLabels}
             />
         ))}
-
-            <button onClick={getPrevResults} disabled={enabledPrev}>Prev</button>
-            <button onClick={getNextResults}>Next</button>
         
         </div>
     );
