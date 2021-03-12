@@ -1,5 +1,6 @@
 import Recipe from "./Recipe";
 import Navigation from "./Navigation";
+import UserInfo from "./Registration/UserInfo";
 
 import React, {useEffect, useState} from 'react';
 
@@ -8,7 +9,6 @@ function Bookmark() {
     const APP_KEY = 'c79a906105c5e348ec12bb9b47b0b363';
 
     const [recipes, setRecipes] = useState([]);
-    const [index, setIndex] = useState(0);
     
     useEffect(() => {
         // runs everytime the web page (re)renders
@@ -16,12 +16,21 @@ function Bookmark() {
     });
 
     const getRecipes = async () => { 
-        const response = await fetch( // loop through "search" to create a new query string
-        `https://api.edamam.com/search?q=smoothie&app_id=${APP_ID}&app_key=${APP_KEY}&from=${index}`
-        );
-        const data = await response.json();
-        setRecipes(data.hits);
-        console.log(data.hits);
+        fetch(`http://127.0.0.1:8000/api/user-detail/${UserInfo.getEmail()}/`)
+            .then(response => response.json())
+            .then(data => {
+                // Get list of saved recipes for user and list them here
+                // All should be bookmarked by default
+                // data.forEach(recipe => {
+                    
+                // });
+                // if (data.password == this.state.password) {
+                //     this.props.history.push("home");
+                // }
+                // else {
+                //     this.setState({message: "Account with that login information not found"});
+                // }
+            });
     }
     
     return ( 

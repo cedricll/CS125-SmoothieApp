@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Link} from "react-router-dom";
 import {BsFillBookmarkFill} from "react-icons/bs";
 
 
@@ -28,11 +27,22 @@ class Recipe extends Component {
         })
     }
 
+    addToPreferences = (word) => {// ADD AS LWOERCASE
+        // Check if word exists in Preferences
+        // If exists, send another request for that entry and increase by 1
+        // If not exist, create new entry for that word
+    }
+
+    removeToPreferences = (word) => {// ADD AS LWOERCASE
+        // Make request for email, word entry
+        // Decrease 1
+    }
+
     bookmarkClicked = () => {
         // Get recipe name and split into separate words (remove smoothie)
         var words = this.props.title.label.split(" ");
         words.forEach(word => {
-            // 
+            this.addToPreferences(word);
         });
 
         // These lines of code under here go into for loop

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
+import UserInfo from './UserInfo';
 
 class SignIn extends Component {
     state = {
@@ -16,6 +17,10 @@ class SignIn extends Component {
     }
 
     handleSubmit = (e) => {
+        if (this.state.email == "" || this.state.password == "") {
+            this.setState({message: "Please input an email and password"});
+        }
+
         e.preventDefault(); // stops the page from refreshing
         console.log(this.state); // this has the user email and password information
         fetch(`http://127.0.0.1:8000/api/user-detail/${this.state.email}/`)
@@ -23,6 +28,7 @@ class SignIn extends Component {
             .then(data => {
                 if (data.password == this.state.password) {
                     this.props.history.push("home");
+                    UserInfo.LogIn(this.state.email);
                 }
                 else {
                     this.setState({message: "Account with that login information not found"});
@@ -53,7 +59,7 @@ class SignIn extends Component {
                     </div>
                 </form>
 
-                <p color="red">{this.state.message}</p>
+                <p>{this.state.message}</p>
 
                 <br/>Don't have an account? <Link to="/signup" className="App-link">Click Here</Link>
             </div>
