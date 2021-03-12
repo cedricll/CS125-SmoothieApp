@@ -1,5 +1,3 @@
-import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
-import ToggleButton from 'react-bootstrap/ToggleButton';
 import Recipe from "./Recipe";
 import Navigation from "./Navigation";
 
@@ -14,6 +12,7 @@ function Home() {
     const [recipes, setRecipes] = useState([]);
     const [search, setSearch] = useState([]);
     const [index, setIndex] = useState(0);
+    const [enabledPrev, setEnabledPrev] = useState(false);
 
     const printOutSearch = (search) => {
         for (let i = 0; i < search.length; i++) {
@@ -57,6 +56,9 @@ function Home() {
         );
         const data = await response.json();
         setRecipes(data.hits);
+        if (index == 0) {
+            setEnabledPrev(true);
+        }
         console.log(data.hits);
     }
 
@@ -86,27 +88,7 @@ function Home() {
     return ( 
         <div className="App">
         <Navigation/>
-                <br/><br/><br/><br/><br/><br/><br/>
-
-        {/* <form className="search-form"> 
-            <input className="search-bar" type="text" value={search} onChange={updateSearch}/>
-            <button className="search-button" type="submit">
-            Search
-            </button>
-        </form> */}
-
-      
-        {/* <ToggleButtonGroup type="checkbox" value={search} onChange={updateSearch}>
-          <ToggleButton value={"high-protein"}>High-Protein</ToggleButton>
-          <ToggleButton value={"low-carb"}>Low-Carb</ToggleButton>
-        </ToggleButtonGroup> */}
-
-        {/* <button className="search-button" type="submit" onSubmit={getSearch}>
-            Search
-        </button> */}
-      
-
-        {/* < ToggleButtonGroupControlled value={search}/> */}
+        <br/><br/><br/><br/><br/><br/><br/>
 
         {recipes.map(recipe => (
             <Recipe key={recipe.recipe.label} 
@@ -119,7 +101,7 @@ function Home() {
             />
         ))}
 
-            <button onClick={getPrevResults}>Prev</button>
+            <button onClick={getPrevResults} disabled={enabledPrev}>Prev</button>
             <button onClick={getNextResults}>Next</button>
         
         </div>

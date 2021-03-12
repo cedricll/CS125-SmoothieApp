@@ -3,9 +3,9 @@ from django.http import JsonResponse
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import User_Serializer, Saved_Recipes_Serializer, Health_Options_Serializer, Dietary_Restrictions_Serializer
+from .serializers import User_Serializer, Saved_Recipes_Serializer, Preferences_Serializer
 
-from .models import User_Info, Dietary_Restrictions, Health_Options, Saved_Recipes
+from .models import User_Info, Preferences, Saved_Recipes
 # Create your views here.
 
 @api_view(['GET'])
@@ -53,7 +53,7 @@ def userUpdate(request, pk):
 
 @api_view(['DELETE'])
 def userDelete(request, pk):
-	user = User.objects.get(id=pk)
+	user = User_Info.objects.get(id=pk)
 	user.delete()
 
 	return Response('Item succsesfully delete!')
@@ -85,37 +85,16 @@ def recipeUpdate(request, pk):
 
     return Response(serializer.data)
 
-''' HEALTH_OPTIONS '''
-
-@api_view(['POST'])
-def healthOptionsCreate(request):
-    serializer = Health_Options_Serializer(data=request.data)
-
-    if serializer.is_valid():
-        serializer.save()
-
-    return Response(serializer.data)
-
-@api_view(['POST'])
-def healthOptionsUpdate(request, pk):
-    health_options = Health_Options.objects.get(email=pk)
-    serializer = Health_Options_Serializer(instance=health_options, data=request.data)
-
-    if serializer.is_valid():
-        serializer.save()
-
-    return Response(serializer.data)
-
+''' PREFERENCES '''
 @api_view(['GET'])
-def healthOptionsDetail(request, pk):
-    health_options = Health_Options.objects.get(email=pk)
-    serializer = Health_Options_Serializer(health_options, many=False)
+def recipeDetail(request, pk):
+    recipe = Saved_Recipes.objects.get(email=pk)
+    serializer = Saved_Recipes(recipe, many=False)
     return Response(serializer.data)
 
-''' DIETARY RESTRICTIONS '''
 @api_view(['POST'])
-def dietCreate(request):
-    serializer = Dietary_Restrictions_Serializer(data=request.data)
+def recipeCreate(request):
+    serializer = Saved_Recipes(data=request.data)
 
     if serializer.is_valid():
         serializer.save()
@@ -123,20 +102,15 @@ def dietCreate(request):
     return Response(serializer.data)
 
 @api_view(['POST'])
-def dietUpdate(request, pk):
-    health_options = Health_Options.objects.get(email=pk)
-    serializer = Health_Options_Serializer(instance=health_options, data=request.data)
+def recipeUpdate(request, pk):
+    user = Saved_Recipes.objects.get(email=pk)
+    serializer = Saved_Recipes_Serializer(instance=user, data=request.data)
 
     if serializer.is_valid():
         serializer.save()
 
     return Response(serializer.data)
 
-@api_view(['GET'])
-def healthOptionsDetail(request, pk):
-    health_options = Health_Options.objects.get(email=pk)
-    serializer = Health_Options_Serializer(health_options, many=False)
-    return Response(serializer.data)
 
 
 

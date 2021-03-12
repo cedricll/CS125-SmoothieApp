@@ -7,6 +7,7 @@ class User_Info(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
+    dietary_restrictions = models.IntegerField()
 
 class Saved_Recipes(models.Model):
     email = models.CharField(max_length=50, primary_key=True)
@@ -17,9 +18,10 @@ class Saved_Recipes(models.Model):
 
 class Preferences(models.Model):
     email = models.CharField(max_length=50, primary_key=True)
-    option = models.CharField(max_length=50)
-    score = models.IntegerField()
+    word = models.CharField(max_length=50)
+    count = models.IntegerField()
 
+''' IGNORE '''
 class Dietary_Restrictions(models.Model):
     email = models.CharField(max_length=50, primary_key=True)
     restriction = models.IntegerField()

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User_Info, Dietary_Restrictions, Health_Options, Saved_Recipes
+from .models import User_Info, Saved_Recipes, Preferences
 
 class User_Serializer(serializers.ModelSerializer):
     class Meta:
@@ -11,13 +11,13 @@ class Saved_Recipes_Serializer(serializers.ModelSerializer):
         model = Saved_Recipes
         fields = "__all__" # to diaplay all atrributes of model
 
-class Health_Options_Serializer(serializers.ModelSerializer):
+class Preferences_Serializer(serializers.ModelSerializer):
     class Meta:
-        model = Health_Options
+        model = Preferences
         fields = "__all__" # to diaplay all atrributes of model
 
-''' Might not use '''
-class Dietary_Restrictions_Serializer(serializers.ModelSerializer):
-    class Meta:
-        model = Dietary_Restrictions
-        fields = "__all__" # to diaplay all atrributes of model             
+''' IGNORE '''
+# class Dietary_Restrictions_Serializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Dietary_Restrictions
+#         fields = "__all__" # to diaplay all atrributes of model             
