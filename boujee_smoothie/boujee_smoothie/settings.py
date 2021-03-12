@@ -62,7 +62,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, "react-CS125-SmoothieApp/build"), # build -> public
+            os.path.join(BASE_DIR, "CS125-SmoothieApp/build"), # build -> public
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -138,7 +138,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "react-CS125-SmoothieApp/build/static")
+    os.path.join(BASE_DIR, "CS125-SmoothieApp/build/static")
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
