@@ -11,8 +11,6 @@ function Home() {
 
     const [recipes, setRecipes] = useState([]);
     const [search, setSearch] = useState([]);
-    const [index, setIndex] = useState(0);
-    const [enabledPrev, setEnabledPrev] = useState(false);
 
     const printOutSearch = (search) => {
         for (let i = 0; i < search.length; i++) {
@@ -52,13 +50,11 @@ function Home() {
         // `https://api.edamam.com/search?q=smoothie&${queryDiet}app_id=${APP_ID}&app_key=${APP_KEY}`
         // );
         const response = await fetch( // loop through "search" to create a new query string
-        `https://api.edamam.com/search?q=smoothie&app_id=${APP_ID}&app_key=${APP_KEY}&from=${index}`
+        `https://api.edamam.com/search?q=smoothie&app_id=${APP_ID}&app_key=${APP_KEY}`
         );
         const data = await response.json();
         setRecipes(data.hits);
-        if (index == 0) {
-            setEnabledPrev(true);
-        }
+
         console.log(data.hits);
     }
 
@@ -67,22 +63,6 @@ function Home() {
         // console.log("search before setSearch: " + search)
         setSearch(e);
         // console.log("search after setSearch: " + search);
-    }
-
-    const getNextResults = (e) => {
-        e.preventDefault();
-        setIndex(index + 10);
-    }
-
-
-    const getPrevResults = (e) => {
-        e.preventDefault();
-        if (index != 0) {
-            setIndex(index - 10);
-        }
-        else {
-            
-        }
     }
     
     return ( 
@@ -100,9 +80,6 @@ function Home() {
                     dietLabels={recipe.recipe.dietLabels}
             />
         ))}
-
-            <button onClick={getPrevResults} disabled={enabledPrev}>Prev</button>
-            <button onClick={getNextResults}>Next</button>
         
         </div>
     );
