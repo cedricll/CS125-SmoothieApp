@@ -3,8 +3,8 @@ from django.http import JsonResponse
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import User_Serializer, Saved_Recipes_Serializer, Preferences_Serializer
 
+from .serializers import User_Serializer, Saved_Recipes_Serializer, Preferences_Serializer
 from .models import User_Info, Preferences, Saved_Recipes
 # Create your views here.
 
@@ -53,12 +53,18 @@ def userUpdate(request, pk):
 
 @api_view(['DELETE'])
 def userDelete(request, pk):
-	user = User_Info.objects.get(id=pk)
+	user = User_Info.objects.get(email=pk)
 	user.delete()
 
 	return Response('Item succsesfully delete!')
 
 ''' SAVED_RECIPES '''
+
+@api_view(['GET'])
+def recipeList(request):
+    recipes = Saved_Recipes.objects.all()
+    serializer = Saved_Recipes_Serializer(recipes, many=True)
+    return Response(serializer.data)
 
 @api_view(['GET'])
 def recipeDetail(request, pk):
@@ -68,7 +74,7 @@ def recipeDetail(request, pk):
 
 @api_view(['POST'])
 def recipeCreate(request):
-    serializer = Saved_Recipes(data=request.data)
+    serializer = Saved_Recipes_Serializer(data=request.data)
 
     if serializer.is_valid():
         serializer.save()
@@ -87,30 +93,37 @@ def recipeUpdate(request, pk):
 
 ''' PREFERENCES '''
 
-# @api_view(['GET'])
-# def recipeDetail(request, pk):
-#     recipe = Saved_Recipes.objects.get(email=pk)
-#     serializer = Saved_Recipes(recipe, many=False)
-#     return Response(serializer.data)
+@api_view(['GET'])
+def preferencesList(request):
+    prefs = Preferences.objects.all()
+    serializer = Preferences_Serializer(prefs, many=True)
+    return Response(serializer.data)
 
-# @api_view(['POST'])
-# def recipeCreate(request):
-#     serializer = Saved_Recipes(data=request.data)
+@api_view(['GET'])
+def preferencesDetail(request, e, w):
+    # pref = Preferences.objects.get(email=e, )
+    pref = Preferences.objects.filter(email=e).filter(word = w)
+    serializer = Preferences(pref, many=False)
+    return Response(serializer.data)
 
-#     if serializer.is_valid():
-#         serializer.save()
+@api_view(['POST'])
+def preferencesCreate(request):
+    serializer = Preferences_Serializer(data=request.data)
 
-#     return Response(serializer.data)
+    if serializer.is_valid():
+        serializer.save()
 
-# @api_view(['POST'])
-# def recipeUpdate(request, pk):
-#     user = Saved_Recipes.objects.get(email=pk)
-#     serializer = Saved_Recipes_Serializer(instance=user, data=request.data)
+    return Response(serializer.data)
 
-#     if serializer.is_valid():
-#         serializer.save()
+@api_view(['POST'])
+def preferencesUpdate(request, pk):
+    pref = Preferences.objects.get(email=pk)
+    serializer = Preferences_Serializer(instance=pref, data=request.data)
 
-#     return Response(serializer.data)
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
 
 
 

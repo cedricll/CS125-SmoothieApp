@@ -17,11 +17,11 @@ class Saved_Recipes(models.Model):
     source = models.CharField(max_length=100)
 
 class Preferences(models.Model):
-    email = models.CharField(max_length=50, primary_key=True)
+    email = models.CharField(max_length=50)
     word = models.CharField(max_length=50)
     count = models.IntegerField()
 
 ''' IGNORE '''
-class Dietary_Restrictions(models.Model):
-    email = models.CharField(max_length=50, primary_key=True)
-    restriction = models.IntegerField()
+# class Dietary_Restrictions(models.Model):
+#     email = models.CharField(max_length=50, primary_key=True)
+#     restriction = models.IntegerField()
