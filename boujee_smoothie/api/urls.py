@@ -24,5 +24,6 @@ urlpatterns = [
 
     path('preferences-create/', views.preferencesCreate, name="preferences-create"),
     path('preferences-update/', views.preferencesUpdate, name="preferencs-update"),
-    path('preferences-detail/<str:e>/<str:w>/', views.preferencesDetail, name="preferences-detail"),   
+    path('preferences-detail-unique/<str:e>/<str:w>/', views.preferencesDetail_unique, name="preferences-detail-unique"),
+    path('preferences-detail-email/<str:e>', views.preferencesDetail_email, name="preferences-detail-unique") 
 ]

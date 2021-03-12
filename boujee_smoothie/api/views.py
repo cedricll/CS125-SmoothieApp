@@ -100,10 +100,15 @@ def preferencesList(request):
     return Response(serializer.data)
 
 @api_view(['GET'])
-def preferencesDetail(request, e, w):
-    # pref = Preferences.objects.get(email=e, )
+def preferencesDetail_unique(request, e, w):
     pref = Preferences.objects.filter(email=e).filter(word = w)
-    serializer = Preferences(pref, many=False)
+    serializer = Preferences_Serializer(pref, many=False)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def preferencesDetail_email(request, e):
+    pref = Preferences.objects.filter(email=e)
+    serializer = Preferences_Serializer(pref, many=True)
     return Response(serializer.data)
 
 @api_view(['POST'])
