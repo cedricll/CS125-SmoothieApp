@@ -107,16 +107,35 @@ def preferencesList(request):
     return Response(serializer.data)
 
 @api_view(['GET'])
-def preferencesDetail_unique(request, e, w):
+def preferencesDetail_sub(request, e, w):
     pref = Preferences.objects.filter(email=e).filter(word = w)
     pref = pref[0]
+    pref.count -= 1
+    pref.save()
+    serializer = Preferences_Serializer(pref, many=False)
+
+    return Response(serializer.data)
     
+@api_view(['GET'])
+def preferencesDetail_add(request, e, w):
+    pref = Preferences.objects.filter(email=e).filter(word = w)
+     
     if pref: # if a result if found
+        pref = pref[0]
+        pref.count += 1
+        pref.save()
         serializer = Preferences_Serializer(pref, many=False)
         return Response(serializer.data)
     else:
-        empty = {"email": e, "word": w, "count": -1}
-        return Response(empty)
+        # create a new preference table entry
+        new = Preferences(
+            email=e,
+            word=w,
+            count=1
+        )
+        serializer = Preferences_Serializer(new, many=False)
+        new.save()
+        return Response(serializer.data)
 
 @api_view(['GET'])
 def preferencesDetail_email(request, e):
@@ -133,18 +152,6 @@ def preferencesCreate(request):
 
     return Response(serializer.data)
 
-
-# @api_view(['POST'])
-# def preferencesUpdate(request, e, w):
-#     pref = Preferences.objects.filter(email=e).filter(word=w)
-#     pref = pref[0]
-#     serializer = Preferences_Serializer(instance=pref, data=request.data)
-
-#     if serializer.is_valid():
-#         serializer.save()
-
-#     return Response(serializer.data)
-
 @api_view(['POST'])
 def preferencesUpdate(request, i):
     pref = Preferences.objects.get(id=i)
@@ -156,8 +163,7 @@ def preferencesUpdate(request, i):
     return Response(serializer.data)
 
 @api_view(['DELETE'])
-def preferencesDelete(request, e, w):
-    pref = Saved_Recipes.objects.filter(email=e).filter(word = w)
-    pref = pref[0]
-    pref.delete
+def preferencesDelete(request, i):
+    pref = Preferences.objects.get(id=i)
+    pref.delete()
     return Response('Item succsesfully delete!')

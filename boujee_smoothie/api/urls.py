@@ -24,8 +24,9 @@ urlpatterns = [
     path('preferences-list/', views.preferencesList, name="preferences-list"),
 
     path('preferences-create/', views.preferencesCreate, name="preferences-create"),
-    # path('preferences-update/<str:e>/<str:w>/', views.preferencesUpdate, name="preferencs-update"),
     path('preferences-update/<str:i>/', views.preferencesUpdate, name="preferencs-update"),
-    path('preferences-detail-unique/<str:e>/<str:w>/', views.preferencesDetail_unique, name="preferences-detail-unique"),
-    path('preferences-detail-email/<str:e>', views.preferencesDetail_email, name="preferences-detail-unique") 
+    path('preferences-detail-add/<str:e>/<str:w>/', views.preferencesDetail_add, name="preferences-detail-unique"),
+    path('preferences-detail-sub/<str:e>/<str:w>/', views.preferencesDetail_sub, name="preferences-detail-sub"),
+    path('preferences-detail-email/<str:e>/', views.preferencesDetail_email, name="preferences-detail-email"),
+    path('preferences-delete/<str:i>/', views.preferencesDelete, name="preferences-delete")
 ]
