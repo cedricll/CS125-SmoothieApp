@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {BsFillBookmarkFill} from "react-icons/bs";
+import UserInfo from './Registration/UserInfo';
 
 
 class Recipe extends Component {
@@ -27,74 +28,39 @@ class Recipe extends Component {
         })
     }
 
-    addToPreferences = (word) => {// ADD AS LWOERCASE
-        // Check if word exists in Preferences
-        // If exists, send another request for that entry and increase by 1
-        // If not exist, create new entry for that word
+    addToPreferences = (word) => {
+        var w = word.toLowerCase();
+        var api_url = "api/preferences-detail-add";
+        fetch(`${api_url}/${UserInfo.getEmail()}/${w}/`)
+            .then(response => response.json())
+            .then(data => {console.log(data)});
     }
 
-    removeToPreferences = (word) => {// ADD AS LWOERCASE
-        // Make request for email, word entry
-        // Decrease 1
+    removeFromPreferences = (word) => {
+        var w = word.toLowerCase();
+        var api_url = "api/preferences-detail-sub";
+        fetch(`${api_url}/${UserInfo.getEmail()}/${w}/`)
+            .then(response => response.json())
+            .then(data => {console.log(data)});
     }
 
     bookmarkClicked = () => {
+        console.log(this.props.title);
         // Get recipe name and split into separate words (remove smoothie)
-        var words = this.props.title.label.split(" ");
-        words.forEach(word => {
-            this.addToPreferences(word);
-        });
-
-        // These lines of code under here go into for loop
-        // Do this stuff to CHECK if word in Preferences
-
-        // fetch(`http://127.0.0.1:8000/api/user-detail/${this.state.email}/`)
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         if (data.password == this.state.password) {
-        //             this.props.history.push("home");
-        //         }
-        //         else {
-        //             this.setState({message: "Account with that login information not found"});
-        //         }
-        //     });
-
-        // CREATE NEW ENTRY IOF NOT EXIST
-        // fetch(url, {
-        //     method:'POST',
-        //     headers:{
-        //       'Content-type':'application/json',
-        //     //   'X-CSRFToken': csrftoken,
-        //     },
-        //     body:JSON.stringify(newProfile)
-        // });
-
-        // UPDATE EXISTING ENTRY IF EXIST
-        // fetch(url, {
-        //     method:'POST',
-        //     headers:{
-        //       'Content-type':'application/json',
-        //     //   'X-CSRFToken': csrftoken,
-        //     },
-        //     body:JSON.stringify(newProfile)
-        // });
-
-        // ADD ENTRY TO SAVED RECIPES
-        // fetch(url, {
-        //     method:'POST',
-        //     headers:{
-        //       'Content-type':'application/json',
-        //     //   'X-CSRFToken': csrftoken,
-        //     },
-        //     body:JSON.stringify(newProfile)
-        // });
+        var words = this.props.title.split(" ");
 
         // Toggle Icon View
         if (this.state.liked) {
             this.unlike();
+            words.forEach(word => {
+                this.removeFromPreferences(word);
+            });
         }
         else {
             this.like();
+            words.forEach(word => {
+                this.addToPreferences(word);
+            });
         }
     }
 
