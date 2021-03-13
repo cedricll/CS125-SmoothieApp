@@ -114,7 +114,8 @@ def preferencesDetail_unique(request, e, w):
         serializer = Preferences_Serializer(pref, many=False)
         return Response(serializer.data)
     else:
-        return Response("no object found")
+        empty = {"email": "", "word": "", "count": -1}
+        return Response(empty)
 
 @api_view(['GET'])
 def preferencesDetail_email(request, e):
@@ -131,17 +132,6 @@ def preferencesCreate(request):
 
     return Response(serializer.data)
 
-@api_view(['POST'])
-def preferencesUpdate(request, pk):
-    pref = Preferences.objects.get(email=pk)
-    serializer = Preferences_Serializer(instance=pref, data=request.data)
-
-    if serializer.is_valid():
-        serializer.save()
-
-    return Response(serializer.data)
-
-
 # @api_view(['POST'])
 # def preferencesUpdate(request, pk):
 #     pref = Preferences.objects.get(email=pk)
@@ -151,6 +141,18 @@ def preferencesUpdate(request, pk):
 #         serializer.save()
 
 #     return Response(serializer.data)
+
+
+@api_view(['POST'])
+def preferencesUpdate(request, e, w, i):
+    pref = Preferences.objects.filter(email=e).filter(word=w)
+    pref.count = pref.count + int(i)
+    serializer = Preferences_Serializer(instance=pref, data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
 
 
 
