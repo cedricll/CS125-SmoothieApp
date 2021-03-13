@@ -1,6 +1,7 @@
-import React, {useState} from "react";
+import axios from 'axios';
 
 var UserInfo = (function() {
+
     var user_email = "";
     var saved_recipes = [];
 
@@ -25,26 +26,16 @@ var UserInfo = (function() {
         return preferences;
     };
 
-    var scoreRecipe = function(label) {
-        fetch(`http://127.0.0.1:8000/api/calculate-score/${label}/`)
-            .then(response => {return response.json()})
-            .then(data => {};
-        // console.log("Score: " + score);
-        // var preferences = getPreferences();
-        // var length = preferences[0];
-        // console.log(preferences);
-        // console.log(preferences.length);
-
-        // preferences.forEach(pref => {
-        //     words.forEach(word => {
-        //         if (word.toLowerCase() == pref.word) {
-        //             score += pref.count;
-        //         }
-        //         console.log("word: " + word + " != pref" + pref.word);
-        //     })
-        // });
+    var scoreRecipe = async function(label) {
+        var str = label;
+        var res = str.split(" ");     // ["sweet", "potato", "recipe"]
+        var joined_str = res.join('-');    // "sweet-potato-recipe"
         
-        // return score;
+        fetch(`http://127.0.0.1:8000/api/calculate-score/${joined_str}/`)
+        .then(response => response.json())
+        .then(data => {console.log(data)});
+        
+        return;
     }
 
     var loadSavedRecipes = function() {
