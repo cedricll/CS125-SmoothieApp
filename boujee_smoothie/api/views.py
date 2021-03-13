@@ -75,9 +75,8 @@ def recipeDetail(request, pk):
 
 @api_view(['DELETE'])
 def recipeDelete(request, e, r):
-	recipe = Saved_Recipes.objects.filter(email=r).filter(recipe_name = r)
-	recipe.delete()
-
+    recipe = Saved_Recipes.objects.filter(email=r).filter(recipe_name = r)
+    recipe.delete()
     return Response('Item succsesfully delete!')
 
 @api_view(['POST'])
@@ -110,8 +109,12 @@ def preferencesList(request):
 @api_view(['GET'])
 def preferencesDetail_unique(request, e, w):
     pref = Preferences.objects.filter(email=e).filter(word = w)
-    serializer = Preferences_Serializer(pref, many=False)
-    return Response(serializer.data)
+
+    if pref: # if a result if found
+        serializer = Preferences_Serializer(pref, many=False)
+        return Response(serializer.data)
+    else:
+        return Response("no object found")
 
 @api_view(['GET'])
 def preferencesDetail_email(request, e):
@@ -137,6 +140,18 @@ def preferencesUpdate(request, pk):
         serializer.save()
 
     return Response(serializer.data)
+
+
+# @api_view(['POST'])
+# def preferencesUpdate(request, pk):
+#     pref = Preferences.objects.get(email=pk)
+#     serializer = Preferences_Serializer(instance=pref, data=request.data)
+
+#     if serializer.is_valid():
+#         serializer.save()
+
+#     return Response(serializer.data)
+
 
 
 
