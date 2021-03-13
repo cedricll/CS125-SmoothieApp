@@ -2,53 +2,38 @@ import Recipe from "./Recipe";
 import Navigation from "./Navigation";
 
 import React, {useEffect, useState} from 'react';
+import UserInfo from "./Registration/UserInfo";
 
 function Home() {
     const APP_ID = 'bb6b3d95';
     const APP_KEY = 'c79a906105c5e348ec12bb9b47b0b363';
-    // const index = 0;
-
 
     const [recipes, setRecipes] = useState([]);
-    const [search, setSearch] = useState([]);
-
-    const printOutSearch = (search) => {
-        for (let i = 0; i < search.length; i++) {
-            console.log(search[i])
-        }
-    }
-  
-    const makeDietQuery = (search) => {
-        var dietQuery = "diet="
-        for (let i = 0; i < search.length; i++) {
-            dietQuery += search[i];
-            if (i == search.length - 1) {
-                dietQuery += "&";
-                break;
-            }
-            dietQuery += "&diet=";
-        }
-    return dietQuery;
-    }
     
-    var queryDiet = makeDietQuery(search);
     useEffect(() => { 
         // runs everytime the web page (re)renders
         getRecipes();
-
-        printOutSearch(search);
-        var queryDiet = makeDietQuery(search);
-        console.log(queryDiet);
-    }); 
+    }) 
 
     const getRecipes = async () => {
         const response = await fetch(
-        // loop through "search" to create a new query string
-        `https://api.edamam.com/search?q=smoothie&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=50`
+        `https://api.edamam.com/search?q=smoothie&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=30`
         );
         const data = await response.json();
-        setRecipes(data.hits);
-        console.log(data.hits);
+        var extractedRecipes = [];
+        data.hits.forEach(hit => {
+            var extractedRecipe = {
+                key: hit.recipe.label,
+                title: hit.recipe.label,
+                source: hit.recipe.source,
+                link: hit.recipe.url,
+                image: hit.recipe.image,
+                score: UserInfo.scoreRecipe(hit.recipe.label)
+            };
+            extractedRecipes.push(extractedRecipe);
+        });
+        extractedRecipes.sort(function(a, b){return a.score - b.score});
+        setRecipes(extractedRecipes);
     }
     
     return ( 
@@ -57,18 +42,17 @@ function Home() {
         <br/><br/><br/><br/><br/><br/><br/>
 
         {recipes.map(recipe => (
-            <Recipe key={recipe.recipe.label} 
-                    title={recipe.recipe.label} 
-                    source={recipe.recipe.source}
-                    link={recipe.recipe.url}
-                    image={recipe.recipe.image}
-                    healthLabels={recipe.recipe.healthLabels}
-                    dietLabels={recipe.recipe.dietLabels}
+            <Recipe key={recipe.label} 
+                    title={recipe.title} 
+                    source={recipe.source}
+                    link={recipe.url}
+                    image={recipe.image}
+                    score={recipe.score}
             />
         ))}
         
         </div>
-    );
+    )
 }
 
 export default Home;
