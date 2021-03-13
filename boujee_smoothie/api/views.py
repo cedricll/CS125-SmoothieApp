@@ -115,7 +115,7 @@ def preferencesDetail_unique(request, e, w):
         serializer = Preferences_Serializer(pref, many=False)
         return Response(serializer.data)
     else:
-        empty = {"email": "", "word": "", "count": -1}
+        empty = {"email": e, "word": w, "count": -1}
         return Response(empty)
 
 @api_view(['GET'])
