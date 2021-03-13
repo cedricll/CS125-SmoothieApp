@@ -111,6 +111,7 @@ def preferencesDetail_unique(request, e, w):
     pref = Preferences.objects.filter(email=e).filter(word = w)
 
     if pref: # if a result if found
+        pref = pref[0]
         serializer = Preferences_Serializer(pref, many=False)
         return Response(serializer.data)
     else:
