@@ -7,29 +7,8 @@ import UserInfo from "./Registration/UserInfo";
 function Home() {
     const APP_ID = 'bb6b3d95';
     const APP_KEY = 'c79a906105c5e348ec12bb9b47b0b363';
-    // const index = 0;
-
 
     const [recipes, setRecipes] = useState([]);
-
-    const printOutSearch = (search) => {
-        for (let i = 0; i < search.length; i++) {
-            console.log(search[i])
-        }
-    }
-  
-    const makeDietQuery = (search) => {
-        var dietQuery = "diet="
-        for (let i = 0; i < search.length; i++) {
-            dietQuery += search[i];
-            if (i == search.length - 1) {
-                dietQuery += "&";
-                break;
-            }
-            dietQuery += "&diet=";
-        }
-    return dietQuery;
-    }
     
     useEffect(() => { 
         // runs everytime the web page (re)renders
@@ -43,7 +22,6 @@ function Home() {
         const data = await response.json();
         var extractedRecipes = [];
         data.hits.forEach(hit => {
-            console.log(hit);
             var extractedRecipe = {
                 key: hit.recipe.label,
                 title: hit.recipe.label,
@@ -54,8 +32,8 @@ function Home() {
             };
             extractedRecipes.push(extractedRecipe);
         });
+        extractedRecipes.sort(function(a, b){return a.score - b.score});
         setRecipes(extractedRecipes);
-        // Sort recipes by score
     }
     
     return ( 
@@ -65,10 +43,11 @@ function Home() {
 
         {recipes.map(recipe => (
             <Recipe key={recipe.label} 
-                    title={recipe.label} 
+                    title={recipe.title} 
                     source={recipe.source}
                     link={recipe.url}
                     image={recipe.image}
+                    score={recipe.score}
             />
         ))}
         

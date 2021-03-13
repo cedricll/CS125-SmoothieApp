@@ -1,3 +1,5 @@
+import { prettyDOM } from "@testing-library/dom";
+
 var UserInfo = (function() {
     var user_email = "";
     var saved_recipes = [];
@@ -15,6 +17,7 @@ var UserInfo = (function() {
         fetch(`http://127.0.0.1:8000/api/preferences-detail-email/${user_email}/`)
             .then(response => response.json())
             .then(data => {
+                preferences.push(data.length);
                 data.forEach(pref => {
                     preferences.push(pref);
                 })
@@ -25,17 +28,32 @@ var UserInfo = (function() {
     var scoreRecipe = function(label) {
         var score = 0;
         var words = label.split(" ");
-        var preferences = getPreferences();
 
-        if (preferences.length > 0) {
-            words.forEach(word => {
-                getPreferences().forEach(pref => {
-                    if (word.toLowerCase() == pref.word) {
-                        score++;
-                    }
+        fetch(`http://127.0.0.1:8000/api/preferences-detail-email/${user_email}/`)
+            .then(response => {return response.json()})
+            .then(data => {
+                data.forEach(pref => {
+                    words.forEach(word => {
+                        if (word.toLowerCase() == pref.word) {
+                            score += 1;
+                        }     
+                    })
                 })
             });
-        }
+        console.log("Score: " + score);
+        // var preferences = getPreferences();
+        // var length = preferences[0];
+        // console.log(preferences);
+        // console.log(preferences.length);
+
+        // preferences.forEach(pref => {
+        //     words.forEach(word => {
+        //         if (word.toLowerCase() == pref.word) {
+        //             score += pref.count;
+        //         }
+        //         console.log("word: " + word + " != pref" + pref.word);
+        //     })
+        // });
         
         return score;
     }

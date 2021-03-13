@@ -67,7 +67,7 @@ class Recipe extends Component {
     render () {
         return (
             <div>
-                <h1 className="RecipeName">{this.props.title}</h1>
+                <h1 className="RecipeName">{this.props.title} - {this.props.score}</h1>
                 <img className="RecipeImage" src={this.props.image} alt=""/><br/>
                 <button className="LikeButton" onClick={this.bookmarkClicked}>
                     <BsFillBookmarkFill color={this.state.bookmarkColor} size="20px"></BsFillBookmarkFill>
