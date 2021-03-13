@@ -28,5 +28,8 @@ urlpatterns = [
     path('preferences-detail-add/<str:e>/<str:w>/', views.preferencesDetail_add, name="preferences-detail-unique"),
     path('preferences-detail-sub/<str:e>/<str:w>/', views.preferencesDetail_sub, name="preferences-detail-sub"),
     path('preferences-detail-email/<str:e>/', views.preferencesDetail_email, name="preferences-detail-email"),
-    path('preferences-delete/<str:i>/', views.preferencesDelete, name="preferences-delete")
+    path('preferences-delete/<str:i>/', views.preferencesDelete, name="preferences-delete"),
+
+    #SCORING
+    path('calculate-score/<str:line>/', views.calculateScore, name="calculate-score")
 ]

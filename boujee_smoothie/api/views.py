@@ -167,3 +167,16 @@ def preferencesDelete(request, i):
     pref = Preferences.objects.get(id=i)
     pref.delete()
     return Response('Item succsesfully delete!')
+
+@api_view(['GET'])
+def calculateScore(request, line):
+    score = 0
+    tokens = line.split()
+
+    for w in tokens:
+        pref = Preferences.objects.filter(word=w)
+        if (pref):
+            for o in pref:
+                score += o.count
+
+    return Response(str(score))
