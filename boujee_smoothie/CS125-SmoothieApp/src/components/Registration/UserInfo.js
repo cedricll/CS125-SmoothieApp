@@ -1,4 +1,4 @@
-import { prettyDOM } from "@testing-library/dom";
+import React, {useState} from "react";
 
 var UserInfo = (function() {
     var user_email = "";
@@ -26,21 +26,10 @@ var UserInfo = (function() {
     };
 
     var scoreRecipe = function(label) {
-        var score = 0;
-        var words = label.split(" ");
-
-        fetch(`http://127.0.0.1:8000/api/preferences-detail-email/${user_email}/`)
+        fetch(`http://127.0.0.1:8000/api/calculate-score/${label}/`)
             .then(response => {return response.json()})
-            .then(data => {
-                data.forEach(pref => {
-                    words.forEach(word => {
-                        if (word.toLowerCase() == pref.word) {
-                            score += 1;
-                        }     
-                    })
-                })
-            });
-        console.log("Score: " + score);
+            .then(data => {};
+        // console.log("Score: " + score);
         // var preferences = getPreferences();
         // var length = preferences[0];
         // console.log(preferences);
@@ -55,7 +44,7 @@ var UserInfo = (function() {
         //     })
         // });
         
-        return score;
+        // return score;
     }
 
     var loadSavedRecipes = function() {

@@ -44,6 +44,48 @@ class Recipe extends Component {
             .then(data => {console.log(data)});
     }
 
+    saveRecipe = () => {
+        const recipe = {
+            email: UserInfo.getEmail(),
+            recipe_name: this.props.title,
+            image_url: this.props.image,
+            recipe_url: this.props.link,
+            source: this.props.source
+        };
+        const url = "http://127.0.0.1:8000/api/recipe-create/";
+        fetch(url, {
+            method:'POST',
+            headers:{
+              'Content-type':'application/json',
+            //   'X-CSRFToken': csrftoken,
+            },
+            body:JSON.stringify(recipe)
+        });
+        console.log("Saved");
+    }
+
+    removeSavedRecipe = () => {
+        const recipe = {
+            email: UserInfo.getEmail(),
+            recipe_name: this.props.title,
+            image_url: this.props.image,
+            recipe_url: this.props.link,
+            source: this.props.source
+        };
+        const api_url = "http://127.0.0.1:8000/api/recipe-delete";
+        fetch(`${api_url}/${UserInfo.getEmail()}/${this.props.title}`)
+            .then(response => response.json())
+            .then(data => { console.log(data)});
+        // fetch(url, {
+        //     method:'DELETE',
+        //     headers:{
+        //       'Content-type':'application/json',
+        //     //   'X-CSRFToken': csrftoken,
+        //     },
+        //     body:JSON.stringify(recipe)
+        // });
+    }
+
     bookmarkClicked = () => {
         console.log(this.props.title);
         // Get recipe name and split into separate words (remove smoothie)
@@ -55,12 +97,14 @@ class Recipe extends Component {
             words.forEach(word => {
                 this.removeFromPreferences(word);
             });
+            this.removeSavedRecipe();
         }
         else {
             this.like();
             words.forEach(word => {
                 this.addToPreferences(word);
             });
+            this.saveRecipe();
         }
     }
 
