@@ -171,9 +171,10 @@ def preferencesDelete(request, i):
 @api_view(['GET'])
 def calculateScore(request, line):
     score = 0
-    tokens = line.split()
+    tokens = line.split("-")
 
     for w in tokens:
+        w = w.lower()
         pref = Preferences.objects.filter(word=w)
         if (pref):
             for o in pref:
