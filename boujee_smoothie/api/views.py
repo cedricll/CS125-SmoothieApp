@@ -70,7 +70,7 @@ def recipeList(request):
 def recipeDetail(request, pk):
     # recipe = Saved_Recipes.objects.get(email=pk)
     recipe = Saved_Recipes.objects.filter(email=pk)
-    serializer = Saved_Recipes(recipe, many=True)
+    serializer = Saved_Recipes_Serializer(recipe, many=True)
     return Response(serializer.data)
 
 @api_view(['DELETE'])

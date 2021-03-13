@@ -11,10 +11,10 @@ class User_Info(models.Model):
 
 class Saved_Recipes(models.Model):
     email = models.CharField(max_length=50)
-    recipe_name = models.CharField(max_length = 50)
-    image_url = models.CharField(max_length=250)
-    recipe_url = models.CharField(max_length=250)
-    source = models.CharField(max_length=100)
+    recipe_name = models.CharField(max_length = 100)
+    image_url = models.CharField(max_length=500)
+    recipe_url = models.CharField(max_length=500)
+    source = models.CharField(max_length=500)
 
 class Preferences(models.Model):
     email = models.CharField(max_length=50)
